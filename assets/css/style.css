@@ -1,0 +1,46 @@
+body{
+    background: url("https://wallpapercave.com/wp/PiOGgDz.jpg");
+}
+
+header{
+    margin-left: 13%;
+    width: 980px;
+
+}
+#main {
+    margin-left: 13%;
+    width: 980px;
+    height: 900px;
+    background: white;
+    opacity: 0.7;
+    filter: alpha(opacity=50);   
+}
+h1{
+    color:white;
+    font-size: 75px;
+    text-align: center;
+    font-family: 'Yellowtail', cursive;
+}
+h2{
+    margin-left: 40%;
+}
+h3{
+    color:white;
+    font-family: 'Yellowtail', cursive;
+    margin-left: 20%;
+}
+h4{
+    font-size: 40px;
+    margin-left: 47%;
+}
+.questions{
+    text-align: center;
+    color: red;
+    margin-bottom: 5px;
+    font-size: 20px;
+}
+.answers{
+    color: blue;
+    margin-bottom: 20px;
+    text-align: center;
+}

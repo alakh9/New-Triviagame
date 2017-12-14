@@ -1,1 +1,2 @@
-# New-Triviagame
+# TriviaGame
+Basic quiz

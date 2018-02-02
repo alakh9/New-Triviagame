@@ -1,137 +1,174 @@
-$(document).ready(function(){
-    $("#main").hide()
+var panel = $("#quiz-area");
 
-    $("#start-button").click(function(){
-        $("#main").show()
-    
-    var correctCount = 0;
-    var wrongCount = 0;
-    var number = 60;
+// Question set
+var questions = [{
+  question: "Which is the largest state in the USA",
+  answers: ["Texas", "Alaska", "California", "Montana"],
+  correctAnswer: "Alaska"
+}, {
+  question: "Which State only borders 1 other State?",
+  answers: ["North-Dakota", "Utah", "Maine", "Oregon"],
+  correctAnswer: "Maine"
+}, {
+  question: "Which State border claims the territory over 4 of the 5 Great Lakes?",
+  answers: ["Wisconsin", "Ohio", "Michigan", "Indiana"],
+  correctAnswer: "Michigan"
+}, {
+  question: "Which State is considered the most furthest North?",
+  answers: ["Minnesota", "Maine", "Vermont", "Washington"],
+  correctAnswer: "Minnesota"
+}, {
+  question: "Which State is home to the longest river?",
+  answers: ["Mississippi", "Colorado", "Missouri", "Michigan"],
+  correctAnswer: "Missouri"
+}, {
+  question: "Death Valley is located where in the U.S.A?",
+  answers: ["California", "Nevada", "Iowa", "Tennessee"],
+  correctAnswer: "California"
+}, {
+  question: "Which State has the most population in the U.S.A?",
+  answers: ["Texas", "California", "New-York", "Florida"],
+  correctAnswer: "California"
+}, {
+  question: "Which State has the highest elevation?",
+  answers: ["Oklahoma", "Wyoming", "Arizona", "Colorado"],
+  correctAnswer: "Colorado"
+}];
 
-    alert("Begin!");
-    $("#start-button").on("click", start);  
-    $("#submit-button").on("click", finish); 
-  
-    function start(){
-        counter = setInterval(timer, 1000);
-        $(".header").hide();
+// Variable that will hold the setInterval
+var timer;
+
+var game = {
+
+  correct: 0,
+  incorrect: 0,
+  counter: 60,
+
+  countdown: function() {
+    game.counter--;
+    $("#counter-number").html(game.counter);
+    if (game.counter === 0) {
+      console.log("TIME UP");
+      game.done();
     }
-    function timer(){
-        number--;
-        $("#show-number").html("<h4>" + number + "</h4>" );
-        if (number === 0){
-          alert("Time over!")
-          stop();
-        }
+  },
+
+  start: function() {
+    timer = setInterval(game.countdown, 1000);
+
+    $("#sub-wrapper").prepend("<h2>Time Remaining: <span id='counter-number'>120</span> Seconds</h2>");
+
+    $("#start").remove();
+
+    for (var i = 0; i < questions.length; i++) {
+      panel.append("<h2>" + questions[i].question + "</h2>");
+      for (var j = 0; j < questions[i].answers.length; j++) {
+        panel.append("<input type='radio' name='question-" + i +
+        "' value='" + questions[i].answers[j] + "''>" + questions[i].answers[j]);
+      }
     }
-    
 
-    $("#submit-button").click(function(){
-        $("#score").show();
-        $(".questions").hide();
-        $(".answers").hide();
-        $("#submit-button").hide();
+    panel.append("<button id='done'>Done</button>");
+  },
 
+  done: function() {
+
+    $.each($("input[name='question-0']:checked"), function() {
+      if ($(this).val() === questions[0].correctAnswer) {
+        game.correct++;
+      }
+      else {
+        game.incorrect++;
+      }
     });
 
-    function stop(){
-        clearInterval(counter);
-        $("#score").show();
-        $(".questions").hide();
-        $(".answers").hide();
-        $("#submit-button").hide();
-    }
-    function finish(){
-        number = 1;
-        clearInterval(counter); 
-        timer();
-    }
-  
-    
-        start(); 
+    $.each($("input[name='question-1']:checked"), function() {
+      if ($(this).val() === questions[1].correctAnswer) {
+        game.correct++;
+      }
+      else {
+        game.incorrect++;
+      }
     });
 
-    
-    function timeover(){
-               
-        var Q1 = $('input:radio[name="q1"]:checked').val();
-        console.log("this is q1" + Q1)
-        var Q2 = $('input:radio[name="q2"]:checked').val();
-        var Q3 = $('input:radio[name="q3"]:checked').val();
-        var Q4 = $('input:radio[name="q4"]:checked').val();
-        var Q5 = $('input:radio[name="q5"]:checked').val();
-        var Q6 = $('input:radio[name="q6"]:checked').val();
-        var Q7 = $('input:radio[name="q7"]:checked').val();
-        var Q8 = $('input:radio[name="q8"]:checked').val();
-        var Q9 = $('input:radio[name="q9"]:checked').val();
+    $.each($("input[name='question-2']:checked"), function() {
+      if ($(this).val() === questions[2].correctAnswer) {
+        game.correct++;
+      }
+      else {
+        game.incorrect++;
+      }
+    });
 
-        if(Q1 == "1b"){
-            correctCount++;
-        }
-        else{
-            wrongCount++;
-        }
+    $.each($("input[name='question-3']:checked"), function() {
+      if ($(this).val() === questions[3].correctAnswer) {
+        game.correct++;
+      }
+      else {
+        game.incorrect++;
+      }
+    });
 
-        if(Q2 == "2c"){
-            correctCount++;
-        }
-        else{
-            wrongCount++;
-        }       
+    $.each($("input[name='question-4']:checked"), function() {
+      if ($(this).val() === questions[4].correctAnswer) {
+        game.correct++;
+      }
+      else {
+        game.incorrect++;
+      }
+    });
 
-        if(Q3 == "3c"){
-            correctCount++;
-        }
-        else{
-            wrongCount++;
-        }
-        if(Q4 == "4a"){
-            correctCount++;
-        }
-        else{
-            wrongCount++;
-        }
-        if(Q5 == "5b"){
-            correctCount++;
-        }
-        else{
-            wrongCount++;
-        }
-        if(Q6 == "6d"){
-            correctCount++;
-        }
-        else{
-            wrongCount++;
-        }
-        if(Q7 == "7d"){
-            correctCount++;
-        }
-        else{
-            wrongCount++;
-        }
-        if(Q8 == "8c"){
-            correctCount++;
-        }
-        else{
-            wrongCount++;
-        }
-        if(Q9 == "9a"){
-            correctCount++;
-        }
-        else{
-            wrongCount++;
-        }
-    };
+    $.each($("input[name='question-5']:checked"), function() {
+      if ($(this).val() === questions[5].correctAnswer) {
+        game.correct++;
+      }
+      else {
+        game.incorrect++;
+      }
+    });
 
-    function score(){
+    $.each($("input[name='question-6']:checked"), function() {
+      if ($(this).val() === questions[6].correctAnswer) {
+        game.correct++;
+      }
+      else {
+        game.incorrect++;
+      }
+    });
 
-        $("#score").append("<h4>" + correctCount + "</h4>" );
-        $("#score").append("<h4>" + wrongCount + "</h4>" );
+    $.each($("input[name='question-7']:checked"), function() {
+      if ($(this).val() === questions[7].correctAnswer) {
+        game.correct++;
+      }
+      else {
+        game.incorrect++;
+      }
+    });
 
-    }
+    this.result();
+
+  },
+
+  result: function() {
+
+    clearInterval(timer);
+
+    $("#sub-wrapper h2").remove();
+
+    panel.html("<h2>All Done!</h2>");
+    panel.append("<h3>Correct Answers: " + this.correct + "</h3>");
+    panel.append("<h3>Incorrect Answers: " + this.incorrect + "</h3>");
+    panel.append("<h3>Unanswered: " + (questions.length - (this.incorrect + this.correct)) + "</h3>");
+  }
+};
+
+// CLICK EVENTS
+
+$(document).on("click", "#start", function() {
+  game.start();
+});
 
 
-
-
-
-  });
+$(document).on("click", "#done", function() {
+  game.done();
+});
